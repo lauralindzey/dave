@@ -1,32 +1,34 @@
 <?xml version="1.0"?>
 <robot name="mrm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find predator_description)/urdf/robot_parameter.xacro" />
+
     <link name="base_link">
         <visual>
-            <origin rpy="0 0 0" xyz="0 0 0.02262"/>
+            <origin rpy="0 0 0" xyz="0 0 ${base_height/2}"/>
             <geometry>
-                <box size="0.197 0.197 0.04524"/>
+                <box size="${base_width} ${base_width} ${base_height}"/>
             </geometry>
         </visual>
     </link>
     
     <joint name="base_link__link_01" type="revolute">
         <axis xyz="0 0 1" />
-        <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5" />
-        <origin rpy="0 0 0" xyz="0 0 0.203"/>
+        <limit effort="1000.0" lower="${-3/4*pi}" upper="${3/4*pi}" velocity="0.5" />
+        <origin rpy="0 0 0" xyz="${joint1}"/>
         <parent link="base_link"/>
         <child link="link1"/>
     </joint>
     
     <link name="link1">
         <visual>
-            <origin rpy="0 0 0" xyz="0 0 -0.07888"/>
+            <origin rpy="0 0 0" xyz="0 0 ${link1_length/-2}"/>
             <geometry>
-                <cylinder radius="0.0985" length="0.15776"/>
+                <cylinder radius="0.0985" length="${link1_length}"/>
             </geometry>
         </visual>
 
         <visual>
-            <origin rpy="1.57079632679 0 0" xyz="0 0.07 0"/>
+            <origin rpy="${pi/2} 0 0" xyz="0 0.07 0"/>
             <geometry>
                 <cylinder radius="0.02" length="0.130"/>
             </geometry>
@@ -35,7 +37,7 @@
 
     <joint name="link_01__link_02" type="revolute">
         <axis xyz="1 0 0" />
-        <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5" />
+        <limit effort="1000.0" lower="${-pi*2/3}" upper="0" velocity="0.5" />
         <origin rpy="0 0 0" xyz="0 0.1295 0"/>
         <parent link="link1"/>
         <child link="link2"/>
@@ -51,7 +53,7 @@
     </link>
     <joint name="link_02__link_03" type="revolute">
         <axis xyz="1 0 0" />
-        <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5" />
+        <limit effort="1000.0" lower="0" upper="${125/180.0*pi}" velocity="0.5" />
         <origin rpy="0 0 0" xyz="0 0 0.875"/>
         <parent link="link2"/>
         <child link="link3"/>
@@ -74,7 +76,7 @@
 
     <joint name="link_03__link_04" type="revolute">
         <axis xyz="1 0 0" />
-        <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5" />
+        <limit effort="1000.0" lower="${-100/180*pi}" upper="${100/180*pi}" velocity="0.5" />
         <origin rpy="0 0 0" xyz="0 0.1389 -0.548"/>
         <parent link="link3"/>
         <child link="link4"/>
@@ -91,7 +93,7 @@
 
     <joint name="link_04__link_05" type="revolute">
         <axis xyz="0 1 0" />
-        <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5" />
+        <limit effort="1000.0" lower="${-100/180*pi}" upper="${100/180*pi}" velocity="0.5" />
         <origin rpy="0 0 0" xyz="0 0 -0.121"/>
         <parent link="link4"/>
         <child link="link5"/>
