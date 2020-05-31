@@ -17,10 +17,4 @@
 
   <!-- Link1 -->
   <xacro:property name="link1_length" value="0.15776"/>
-
-
-  
-
-
-  
 </robot>

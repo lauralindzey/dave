@@ -24,8 +24,23 @@
             <origin rpy="0 0 0" xyz="0 0 ${base_height/2}"/>
         </inertial>
     </link>
+
+    <gazebo reference="base_link">
+        <selfCollide>false</selfCollide>
+    </gazebo>
     
     <revolute_joint name="azimuth_joint" />
+
+    <transmission name="azimuth_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="azimuth_joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="azimuth_motor">
+            <mechanicalReduction>1</mechanicalReduction>
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </actuator>
+    </transmission>
 
     <link name="link1">
         <visual>
@@ -42,7 +57,7 @@
         </collision>
 
         <inertial>
-            <mass value="10"/>
+            <mass value="1"/>
             <inertia ixx="0.4" ixy="0.0" ixz="0.0" 
                      iyy="0.4" iyz="0.0" 
                      izz="0.2"/>
@@ -63,13 +78,31 @@
         </collision>
     </link>
 
-    <joint name="elevation" type="revolute">
+    <gazebo reference="link1">
+        <selfCollide>false</selfCollide>
+    </gazebo>
+
+    <joint name="elevation_joint" type="revolute">
         <axis xyz="-1 0 0" />
         <limit effort="1000.0" lower="0" upper="${pi*2/3}" velocity="0.5" />
         <origin rpy="0 0 0" xyz="${elevation_joint_location}"/>
         <parent link="link1"/>
         <child link="link2"/>
     </joint>
+
+    <transmission name="elevation_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="elevation_joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="elevation_motor">
+            <mechanicalReduction>1</mechanicalReduction>
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </actuator>
+    </transmission>
+
+
+
 
     <link name="link2">
         <visual>
@@ -87,7 +120,7 @@
         </collision>
 
         <inertial>
-            <mass value="10"/>
+            <mass value="1"/>
             <inertia ixx="0.4" ixy="0.0" ixz="0.0" 
                      iyy="0.4" iyz="0.0" 
                      izz="0.2"/>
@@ -95,13 +128,28 @@
         </inertial>
     </link>
 
-    <joint name="link_02__link_03" type="revolute">
+    <gazebo reference="link2">
+        <selfCollide>false</selfCollide>
+    </gazebo>
+
+    <joint name="link_02__link_03_joint" type="revolute">
         <axis xyz="1 0 0" />
         <limit effort="1000.0" lower="0" upper="${125/180.0*pi}" velocity="0.5" />
         <origin rpy="0 0 0" xyz="0 0 0.875"/>
         <parent link="link2"/>
         <child link="link3"/>
     </joint>
+
+    <transmission name="link_02__link_03_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="link_02__link_03_joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="link_02__link_03_motor">
+            <mechanicalReduction>1</mechanicalReduction>
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </actuator>
+    </transmission>
 
     <link name="link3">
         <visual>
@@ -130,7 +178,7 @@
         </collision>
 
         <inertial>
-            <mass value="10"/>
+            <mass value=".1"/>
             <inertia ixx="0.4" ixy="0.0" ixz="0.0" 
                      iyy="0.4" iyz="0.0" 
                      izz="0.2"/>
@@ -138,14 +186,28 @@
         </inertial>
         
     </link>
+    <gazebo reference="link3">
+        <selfCollide>false</selfCollide>
+    </gazebo>
 
-    <joint name="link_03__link_04" type="revolute">
+    <joint name="link_03__link_04_joint" type="revolute">
         <axis xyz="1 0 0" />
         <limit effort="1000.0" lower="${-100/180*pi}" upper="${100/180*pi}" velocity="0.5" />
         <origin rpy="0 0 0" xyz="0 0.1389 -0.548"/>
         <parent link="link3"/>
         <child link="link4"/>
     </joint>
+
+    <transmission name="link_03__link_04_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="link_03__link_04_joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="link_03__link_04_motor">
+            <mechanicalReduction>1</mechanicalReduction>
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </actuator>
+    </transmission>
 
     <link name="link4">
         <visual>
@@ -161,7 +223,7 @@
             </geometry>
         </collision>
         <inertial>
-            <mass value="10"/>
+            <mass value=".1"/>
             <inertia ixx="0.4" ixy="0.0" ixz="0.0" 
                      iyy="0.4" iyz="0.0" 
                      izz="0.2"/>
@@ -169,13 +231,28 @@
         </inertial>
     </link>
 
-    <joint name="link_04__link_05" type="revolute">
+    <gazebo reference="link4">
+        <selfCollide>false</selfCollide>
+    </gazebo>
+
+    <joint name="link_04__link_05_joint" type="revolute">
         <axis xyz="0 1 0" />
         <limit effort="1000.0" lower="${-100/180*pi}" upper="${100/180*pi}" velocity="0.5" />
         <origin rpy="0 0 0" xyz="0 0 -0.121"/>
         <parent link="link4"/>
         <child link="link5"/>
     </joint>
+
+    <transmission name="link_04__link_05_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="link_04__link_05_joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="link_04__link_05_motor">
+            <mechanicalReduction>1</mechanicalReduction>
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </actuator>
+    </transmission>
 
     <link name="link5">
         <visual>
@@ -191,11 +268,20 @@
             </geometry>
         </collision>
         <inertial>
-            <mass value="10"/>
+            <mass value=".1"/>
             <inertia ixx="0.4" ixy="0.0" ixz="0.0" 
                      iyy="0.4" iyz="0.0" 
                      izz="0.2"/>
             <origin rpy="0 0 0" xyz="0 0 -0.05"/>
         </inertial>
     </link>
+
+    <gazebo reference="link5">
+        <selfCollide>false</selfCollide>
+    </gazebo>
+    
+    <gazebo>
+      <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    </plugin>
+  </gazebo>
 </robot>
