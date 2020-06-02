@@ -108,14 +108,14 @@
         <visual>
             <origin rpy="3.14 0 0" xyz="0 0 0.4375"/>
             <geometry>
-                <cylinder radius="0.0889" length="0.875"/>
+                <cylinder radius="0.07" length="0.875"/>
             </geometry>
         </visual>
 
         <collision>
             <origin rpy="3.14 0 0" xyz="0 0 0.4375"/>
             <geometry>
-                <cylinder radius="0.0889" length="0.875"/>
+                <cylinder radius="0.07" length="0.875"/>
             </geometry>
         </collision>
 
@@ -153,15 +153,15 @@
 
     <link name="link3">
         <visual>
-            <origin rpy="1.57079632679 0 0" xyz="0 0.15 0"/>
+            <origin rpy="1.57079632679 0 0" xyz="0 0.075 0"/>
             <geometry>
-                <cylinder radius="0.0889" length="0.3"/>
+                <cylinder radius="0.05" length="0.15"/>
             </geometry>
         </visual>
         <collision>
-            <origin rpy="1.57079632679 0 0" xyz="0 0.15 0"/>
+            <origin rpy="1.57079632679 0 0" xyz="0 0.075 0"/>
             <geometry>
-                <cylinder radius="0.0889" length="0.3"/>
+                <cylinder radius="0.05" length="0.15"/>
             </geometry>
         </collision>
         <visual>
