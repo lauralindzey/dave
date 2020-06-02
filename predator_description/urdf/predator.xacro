@@ -29,14 +29,14 @@
         <selfCollide>false</selfCollide>
     </gazebo>
     
-    <revolute_joint name="azimuth_joint" />
+    <revolute_joint name="shoulder_azimuth_joint" />
 
-    <transmission name="azimuth_trans">
+    <transmission name="shoulder_azimuth_trans">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="azimuth_joint">
+        <joint name="shoulder_azimuth_joint">
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
-        <actuator name="azimuth_motor">
+        <actuator name="shoulder_azimuth_motor">
             <mechanicalReduction>1</mechanicalReduction>
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </actuator>
@@ -82,7 +82,7 @@
         <selfCollide>false</selfCollide>
     </gazebo>
 
-    <joint name="elevation_joint" type="revolute">
+    <joint name="shoulder_elevation_joint" type="revolute">
         <axis xyz="-1 0 0" />
         <limit effort="1000.0" lower="0" upper="${pi*2/3}" velocity="0.5" />
         <origin rpy="0 0 0" xyz="${elevation_joint_location}"/>
@@ -90,12 +90,12 @@
         <child link="link2"/>
     </joint>
 
-    <transmission name="elevation_trans">
+    <transmission name="shoulder_elevation_trans">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="elevation_joint">
+        <joint name="shoulder_elevation_joint">
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
-        <actuator name="elevation_motor">
+        <actuator name="shoulder_elevation_motor">
             <mechanicalReduction>1</mechanicalReduction>
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </actuator>
@@ -132,7 +132,7 @@
         <selfCollide>false</selfCollide>
     </gazebo>
 
-    <joint name="link_02__link_03_joint" type="revolute">
+    <joint name="elbow_pivot_joint" type="revolute">
         <axis xyz="1 0 0" />
         <limit effort="1000.0" lower="0" upper="${125/180.0*pi}" velocity="0.5" />
         <origin rpy="0 0 0" xyz="0 0 0.875"/>
@@ -140,12 +140,12 @@
         <child link="link3"/>
     </joint>
 
-    <transmission name="link_02__link_03_trans">
+    <transmission name="elbow_pivot_trans">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="link_02__link_03_joint">
+        <joint name="elbow_pivot_joint">
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
-        <actuator name="link_02__link_03_motor">
+        <actuator name="elbow_pivot_motor">
             <mechanicalReduction>1</mechanicalReduction>
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </actuator>
@@ -190,7 +190,7 @@
         <selfCollide>false</selfCollide>
     </gazebo>
 
-    <joint name="link_03__link_04_joint" type="revolute">
+    <joint name="wrist_pitch_joint" type="revolute">
         <axis xyz="1 0 0" />
         <limit effort="1000.0" lower="${-100/180*pi}" upper="${100/180*pi}" velocity="0.5" />
         <origin rpy="0 0 0" xyz="0 0.1389 -0.548"/>
@@ -198,12 +198,12 @@
         <child link="link4"/>
     </joint>
 
-    <transmission name="link_03__link_04_trans">
+    <transmission name="wrist_pitch_trans">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="link_03__link_04_joint">
+        <joint name="wrist_pitch_joint">
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
-        <actuator name="link_03__link_04_motor">
+        <actuator name="wrist_pitch_motor">
             <mechanicalReduction>1</mechanicalReduction>
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </actuator>
@@ -235,7 +235,7 @@
         <selfCollide>false</selfCollide>
     </gazebo>
 
-    <joint name="link_04__link_05_joint" type="revolute">
+    <joint name="wrist_yaw_joint" type="revolute">
         <axis xyz="0 1 0" />
         <limit effort="1000.0" lower="${-100/180*pi}" upper="${100/180*pi}" velocity="0.5" />
         <origin rpy="0 0 0" xyz="0 0 -0.121"/>
@@ -243,12 +243,12 @@
         <child link="link5"/>
     </joint>
 
-    <transmission name="link_04__link_05_trans">
+    <transmission name="wrist_yaw_trans">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="link_04__link_05_joint">
+        <joint name="wrist_yaw_joint">
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
-        <actuator name="link_04__link_05_motor">
+        <actuator name="wrist_yaw_motor">
             <mechanicalReduction>1</mechanicalReduction>
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </actuator>
