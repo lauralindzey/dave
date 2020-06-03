@@ -62,8 +62,8 @@ UUV launch for project DAVE
         </include>
     </group>
 
-    <!-- rexrov robot with oberon7 arm -->
-    <include file="$(find uuv_dave)/launch/upload_rexrov_oberon7.launch">
+    <!-- rexrov robot with predator arm -->
+    <include file="$(find uuv_dave)/launch/upload_rexrov_predator.launch">
         <arg name="namespace" value="rexrov"/>
         <arg name="x" value="4"/>
         <arg name="y" value="4"/>
