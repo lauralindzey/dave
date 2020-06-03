@@ -62,18 +62,13 @@
             </xacro:link_box_inertial>
 
             <visual>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <origin xyz="0 0 -0.09" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="file://$(find oberon7_description)/meshes/serial_arm/visual/Base.dae"/>
+                    <!-- <box size="0.197 0.197 0.04524"/> -->
+                    <box size="0.197 0.197 0.04524"/>
                 </geometry>
             </visual>
 
-            <collision>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
-                <geometry>
-                    <mesh filename="file://$(find oberon7_description)/meshes/serial_arm/collision/Base.stl"/>
-                </geometry>
-            </collision>
         </link>
 
         <!-- Shoulder link -->
@@ -89,16 +84,9 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="file://$(find oberon7_description)/meshes/serial_arm/visual/ShoulderLink.dae"/>
+                    <cylinder radius="${0.0985}" length="0.15776" />
                 </geometry>
             </visual>
-
-            <collision>
-                <origin xyz="${shoulder_link_com}" rpy="0 0 0"/>
-                <geometry>
-                    <cylinder radius="${0.5 * shoulder_link_width}" length="${shoulder_link_height}" />
-                </geometry>
-            </collision>
         </link>
 
         <joint name="${namespace}/azimuth" type="revolute">
@@ -124,14 +112,14 @@
             </xacro:link_box_inertial>
 
             <visual>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <origin xyz="0.312501 0 0" rpy="0 ${0.5*pi} 0"/>
                 <geometry>
-                    <mesh filename="file://$(find oberon7_description)/meshes/serial_arm/visual/UpperArm.dae"/>
+                    <cylinder radius="${0.5 * upper_arm_width}" length="${upper_arm_length}"/>
                 </geometry>
             </visual>
 
             <collision>
-                <origin xyz="${upper_arm_com}" rpy="0 ${0.5*pi} 0"/>
+                <origin xyz="0.312501 0 0" rpy="0 ${0.5*pi} 0"/>
                 <geometry>
                     <cylinder radius="${0.5 * upper_arm_width}" length="${upper_arm_length}"/>
                 </geometry>
@@ -141,7 +129,7 @@
         <joint name="${namespace}/shoulder" type="revolute">
             <parent link="${namespace}/shoulder_link"/>
             <child link="${namespace}/upper_arm"/>
-            <origin xyz="0.06955 0.00015 0.01536" rpy="${0.5*pi} 0 0"/>
+            <origin xyz="0 0 0.1" rpy="${0.5*pi} 0 0"/>
             <axis xyz="0 0 1"/>
             <!-- <dynamics damping="50" friction="200"/> -->
             <dynamics damping="50" friction="150"/>
@@ -162,16 +150,16 @@
             </xacro:link_box_inertial>
 
             <visual>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <origin xyz="0.125269 ${-elbow_link_length/2-forearm_height/2} 0.0" rpy="0 ${0.5*pi} ${0.5*pi}"/>
                 <geometry>
-                    <mesh filename="file://$(find oberon7_description)/meshes/serial_arm/visual/ElbowLink.dae"/>
+                    <cylinder radius="${0.5 * elbow_link_height}" length="${elbow_link_length+forearm_height}"/>
                 </geometry>
             </visual>
 
             <collision>
-                <origin xyz="${elbow_link_com}" rpy="0 ${0.5*pi} ${0.5*pi}"/>
+                <origin xyz="0.125269 ${-elbow_link_length/2-forearm_height/2} 0.0" rpy="0 ${0.5*pi} ${0.5*pi}"/>
                 <geometry>
-                    <cylinder radius="${0.5 * elbow_link_height}" length="${elbow_link_length}"/>
+                    <cylinder radius="${0.5 * elbow_link_height}" length="${elbow_link_length+forearm_height}"/>
                 </geometry>
             </collision>
         </link>
@@ -200,9 +188,9 @@
             </xacro:link_box_inertial>
 
             <visual>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <origin xyz="${forearm_com}" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="file://$(find oberon7_description)/meshes/serial_arm/visual/Forearm.dae"/>
+                    <cylinder radius="${0.5 * forearm_width}" length="${forearm_height}"/>
                 </geometry>
             </visual>
 
