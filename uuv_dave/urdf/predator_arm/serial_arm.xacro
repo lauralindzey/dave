@@ -58,20 +58,20 @@
                         width="${base_width}"
                         length="${base_length}"
                         height="${base_height}">
-            <origin xyz="${base_com}" rpy="0 0 0"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
             </xacro:link_box_inertial>
 
-            <visual>
-                <origin xyz="0 0 -0.09" rpy="0 0 0"/>
+            <!-- <visual>
+                <origin xyz="0 0 ${-0.15776/2+0.015776/2}" rpy="0 0 0"/>
                 <geometry>
-                    <!-- <box size="0.197 0.197 0.04524"/> -->
-                    <box size="0.197 0.197 0.04524"/>
+                    <box size="0.197 0.197 0.015776"/>
                 </geometry>
-            </visual>
+            </visual> -->
 
         </link>
 
         <!-- Shoulder link -->
+        <xacro:property name="base_height" value="0.203"/>
 
         <link name="${namespace}/shoulder_link">
             <xacro:link_box_inertial mass="${total_mass * shoulder_link_volume / total_volume_bbox}"
@@ -82,14 +82,15 @@
             </xacro:link_box_inertial>
 
             <visual>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <origin xyz="0 0 ${-base_height/2}" rpy="0 0 0"/>
                 <geometry>
-                    <cylinder radius="${0.0985}" length="0.15776" />
+                    <cylinder radius="${0.0985}" length="${base_height}" />
                 </geometry>
             </visual>
         </link>
 
         <joint name="${namespace}/azimuth" type="revolute">
+            <origin xyz="0 0 ${0.203/2}" rpy="0 0 0"/>
             <parent link="${namespace}/base"/>
             <child link="${namespace}/shoulder_link"/>
             <axis xyz="0 0 1"/>
@@ -102,6 +103,7 @@
         <xacro:simple_transmission joint="${namespace}/azimuth" />
 
         <!-- UPPER ARM -->
+        <xacro:property name="upper_arm_l" value="${0.939}"/>
 
         <link name="${namespace}/upper_arm">
             <xacro:link_box_inertial mass="${total_mass * upper_arm_volume / total_volume_bbox}"
@@ -112,24 +114,24 @@
             </xacro:link_box_inertial>
 
             <visual>
-                <origin xyz="0.312501 0 0" rpy="0 ${0.5*pi} 0"/>
+                <origin xyz="${upper_arm_l/2} 0 0" rpy="0 ${0.5*pi} 0"/>
                 <geometry>
-                    <cylinder radius="${0.5 * upper_arm_width}" length="${upper_arm_length}"/>
+                    <cylinder radius="${0.5 * upper_arm_width}" length="${upper_arm_l}"/>
                 </geometry>
             </visual>
 
-            <collision>
+            <!-- <collision>
                 <origin xyz="0.312501 0 0" rpy="0 ${0.5*pi} 0"/>
                 <geometry>
-                    <cylinder radius="${0.5 * upper_arm_width}" length="${upper_arm_length}"/>
+                    <cylinder radius="${0.5 * upper_arm_width}" length="${upper_arm_length+.34712}"/>
                 </geometry>
-            </collision>
+            </collision> -->
         </link>
 
         <joint name="${namespace}/shoulder" type="revolute">
             <parent link="${namespace}/shoulder_link"/>
             <child link="${namespace}/upper_arm"/>
-            <origin xyz="0.1 0 0.1" rpy="${0.5*pi} 0 0"/>
+            <origin xyz="0.1 0 0" rpy="${0.5*pi} 0 0"/>
             <!-- <origin xyz="0 0 0.1" rpy="${0.5*pi} 0 0"/> -->
             <axis xyz="0 0 1"/>
             <!-- <dynamics damping="50" friction="200"/> -->
@@ -152,6 +154,7 @@
 
             <visual>
                 <origin xyz="0.125269 ${-elbow_link_length/2-forearm_height/2} 0.0" rpy="0 ${0.5*pi} ${0.5*pi}"/>
+                <!-- <origin xyz="0.125269 ${-forearm_height/2} 0.0" rpy="0 ${0.5*pi} ${0.5*pi}"/> -->
                 <geometry>
                     <cylinder radius="${0.5 * elbow_link_height}" length="${elbow_link_length+forearm_height}"/>
                 </geometry>
@@ -160,7 +163,7 @@
             <collision>
                 <origin xyz="0.125269 ${-elbow_link_length/2-forearm_height/2} 0.0" rpy="0 ${0.5*pi} ${0.5*pi}"/>
                 <geometry>
-                    <cylinder radius="${0.5 * elbow_link_height}" length="${elbow_link_length+forearm_height}"/>
+                    <cylinder radius="${0.5 * elbow_link_height}" length="${elbow_link_length/3+forearm_height/3}"/>
                 </geometry>
             </collision>
         </link>
@@ -168,7 +171,7 @@
         <joint name="${namespace}/elbow" type="revolute">
             <parent link="${namespace}/upper_arm"/>
             <child link="${namespace}/elbow_link"/>
-            <origin xyz="0.55616 -0.01229 0" rpy="0 0 0"/>
+            <origin xyz="${upper_arm_l-0.064} 0 0" rpy="0 0 0"/>
             <!-- <dynamics damping="50" friction="200"/> -->
             <dynamics damping="50" friction="150"/>
             <axis xyz="0 0 1"/>
@@ -206,7 +209,9 @@
         <joint name="${namespace}/pitch" type="revolute">
             <parent link="${namespace}/elbow_link"/>
             <child link="${namespace}/wrist_link"/>
-            <origin xyz="${0.1349014*3} ${-0.1936267-0.31595760629823427} 0" rpy="${-0*PI} ${-0*PI} 0"/>
+            <!-- <origin xyz="${0.210} ${-0.525} 0" rpy="0 0 ${-0.5*PI}"/> -->
+            <!-- <origin xyz="${0.1349014} ${-0.1936267/3-0.31595760629823427/3} 0" rpy="${-0*PI} ${-0*PI} ${-0.5*PI}"/> -->
+            <origin xyz="${0.1349014} ${-0.1936267/3-0.31595760629823427/3} 0" rpy="${-0*PI} ${-0*PI} ${-0.5*PI}"/>
             <axis xyz="0 0 1"/>
             <!-- <dynamics damping="50" friction="200"/> -->
             <dynamics damping="10" friction="10"/>
