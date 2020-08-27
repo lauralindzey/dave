@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.0.2)
 project(sonar_dave_uuv)
 
 add_definitions(-std=c++11)
@@ -19,7 +19,9 @@ find_package(catkin REQUIRED COMPONENTS
 
 find_package(Eigen3 REQUIRED)
 find_package(OGRE REQUIRED)
-find_package(OpenCV REQUIRED)
+# Trying to fix the error:
+# error: ‘CV_AA’ was not declared in this scope; did you mean ‘CV_AVX’?
+find_package(OpenCV 4 REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system)
 
@@ -84,7 +86,7 @@ include_directories(
 )
 
 add_library(image_sonar_dave_plugin src/gazebo_ros_image_sonar.cpp)
-target_link_libraries(image_sonar_dave_plugin ${OGRE_LIBRARIES} ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
+target_link_libraries(image_sonar_dave_plugin ${OGRE_LIBRARIES} ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${OpenCV_LIBS})
 add_dependencies(image_sonar_dave_plugin ${catkin_EXPORTED_TARGETS})
 list(APPEND SONAR_DAVE_PLUGINS_LIST image_sonar_dave_plugin)
 
