@@ -4,18 +4,20 @@ project(sonar_dave_uuv)
 add_definitions(-std=c++11)
 
 find_package(catkin REQUIRED COMPONENTS
+  cv_bridge
   gazebo_dev
-  sensor_msgs
-  image_transport
-  geometry_msgs
-  std_msgs
-  roscpp
-  tf
   gazebo_plugins
+  geometry_msgs
+  image_transport
+  laser_geometry
   message_filters
-  tf2_ros
+  roscpp
+  sensor_msgs
+  std_msgs
+  tf
   tf2
-  laser_geometry)
+  tf2_ros
+)
 
 find_package(Eigen3 REQUIRED)
 find_package(OGRE REQUIRED)
